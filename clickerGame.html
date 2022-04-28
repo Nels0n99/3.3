@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="container">
+    <div class="content">
+        <button id="clickButton">Click Me!</button>
+        <p></p>
+    </div>
+</div>
+
+<script>
+    const pressButton = document.getElementById('clickButton');
+    const score = document.querySelector('p');
+
+    let startScore = 0;
+    console.log(`Times clicked: ${startScore}`);
+    pressButton.addEventListener('click', function(e){
+       addScore()
+    });
+
+    function addScore(){
+    startScore = startScore + 1;
+    const counter = document.createElement('p');
+    counter.innerHTML = `Times clicked: ${startScore}`;
+    console.log(counter);
+    }
+
+</script>
+</body>
+</html>
