@@ -4,30 +4,68 @@
     <meta charset="UTF-8">
     <title>Title</title>
     <link rel="stylesheet" href="style.css">
+    <style>
+        .hidden{
+            display:none;
+        }
+    </style>
 </head>
 <body>
 <div class="container">
     <div class="content">
+        <p>Score: 0</p>
         <button id="clickButton">Click Me!</button>
-        <p></p>
+        <button class="hidden" id="double">Double Score: 100 score</button>
     </div>
 </div>
 
 <script>
     const pressButton = document.getElementById('clickButton');
+    const doubleScore = document.getElementById('double')
     const score = document.querySelector('p');
 
     let startScore = 0;
-    console.log(`Times clicked: ${startScore}`);
     pressButton.addEventListener('click', function(e){
-       addScore()
+        setDoubleScore()
+        addScore()
+        console.log(`Times clicked: ${startScore}`);
     });
+
+    doubleScore.addEventListener('click', function(e){
+        actionDoubleScore()
+    });
+
 
     function addScore(){
     startScore = startScore + 1;
-    const counter = document.createElement('p');
-    counter.innerHTML = `Times clicked: ${startScore}`;
-    console.log(counter);
+    let counter = score;
+    counter.innerHTML = `Score: ${startScore}`;
+    }
+
+    function multiplyScore(){
+        startScore = startScore * 2;
+        let counter = score;
+        counter.innerHTML = `Score: ${startScore}`;
+    }
+
+    function setDoubleScore(){
+        if(startScore < 50){
+            doubleScore.classList.add("hidden")
+        } else{
+            doubleScore.classList.remove("hidden")
+        }
+    }
+
+    function actionDoubleScore(){
+        if(startScore < 99){
+            let counter = score;
+            counter.innerHTML = `Score: ${startScore}`;
+        } else {
+            startScore = startScore - 100;
+            let counter = score;
+            counter.innerHTML = `Score : ${startScore}`
+            doubleScore.remove()
+        }
     }
 
 </script>
