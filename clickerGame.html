@@ -17,24 +17,30 @@
 <body>
 <div class="container">
     <div class="content">
+        <h1></h1>
         <img class="size" src="https://ameobea.b-cdn.net/osutrack/Mixins/userImage.php?u=4787150">
         <p>Score: 0</p>
         <button id="clickButton">Click Me!</button>
+        <button id="reset">Restart</button>
         <button class="hidden" id="double">Double Score: 100 score</button>
     </div>
 </div>
 
 <script>
     let pressButton = document.getElementById('clickButton');
+    let restartButton = document.getElementById('reset')
     let doubleScore = document.getElementById('double')
+    const gameOverMessage = document.querySelector('h1')
     const score = document.querySelector('p');
     const picture = document.querySelector('img');
     let startScore = 0;
 
+    restartButton.addEventListener('click', function(e){
+
+    });
+
     pressButton.addEventListener('click', function(e){
-        startScore = startScore + 1;
-        let counter = score;
-        counter.innerHTML = `Score: ${startScore}`;
+        addScore()
         setDoubleScore()
         console.log(`Times clicked: ${startScore}`);
     });
@@ -42,6 +48,13 @@
     doubleScore.addEventListener('click', function (e){
         clickDoubleScore();
     });
+
+    function addScore(){
+        startScore = startScore + 1;
+        let counter = score;
+        counter.innerHTML = `Score: ${startScore}`;
+    }
+
     function multiplyScore(){
         startScore = startScore * 2;
         let counter = score;
@@ -71,8 +84,18 @@
                 if(startScore >= 500){
                     picture.src="https://pbs.twimg.com/profile_images/1467840316073865218/f4tX3DQI_400x400.jpg"
                 }
+                announceWin()
             });
             doubleScore.remove()
+        }
+    }
+
+    function announceWin(){
+        if(startScore >= 100000){
+            gameOverMessage.textContent = "You Win!"
+            picture.remove()
+            score.remove()
+            pressButton.remove()
         }
     }
 
