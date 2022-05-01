@@ -8,11 +8,16 @@
         .hidden{
             display:none;
         }
+        .size{
+            width: 100px;
+            height: 100px;
+        }
     </style>
 </head>
 <body>
 <div class="container">
     <div class="content">
+        <img class="size" src="https://ameobea.b-cdn.net/osutrack/Mixins/userImage.php?u=4787150">
         <p>Score: 0</p>
         <button id="clickButton">Click Me!</button>
         <button class="hidden" id="double">Double Score: 100 score</button>
@@ -20,28 +25,23 @@
 </div>
 
 <script>
-    const pressButton = document.getElementById('clickButton');
-    const doubleScore = document.getElementById('double')
+    let pressButton = document.getElementById('clickButton');
+    let doubleScore = document.getElementById('double')
     const score = document.querySelector('p');
-
+    const picture = document.querySelector('img');
     let startScore = 0;
+
     pressButton.addEventListener('click', function(e){
+        startScore = startScore + 1;
+        let counter = score;
+        counter.innerHTML = `Score: ${startScore}`;
         setDoubleScore()
-        addScore()
         console.log(`Times clicked: ${startScore}`);
     });
 
-    doubleScore.addEventListener('click', function(e){
-        actionDoubleScore()
+    doubleScore.addEventListener('click', function (e){
+        clickDoubleScore();
     });
-
-
-    function addScore(){
-    startScore = startScore + 1;
-    let counter = score;
-    counter.innerHTML = `Score: ${startScore}`;
-    }
-
     function multiplyScore(){
         startScore = startScore * 2;
         let counter = score;
@@ -52,18 +52,26 @@
         if(startScore < 50){
             doubleScore.classList.add("hidden")
         } else{
+            picture.src="https://external-preview.redd.it/E_04UTh-H9wugaMN808YS8WKb-f-yYPZ94Wsuf5fdOA.jpg?auto=webp&s=2054623dfa2d3f9d76160266d37e62f7f100aa61"
             doubleScore.classList.remove("hidden")
         }
     }
 
-    function actionDoubleScore(){
-        if(startScore < 99){
+    function clickDoubleScore(){
+        if(startScore < 100){
             let counter = score;
             counter.innerHTML = `Score: ${startScore}`;
-        } else {
+        } else if(startScore >= 100) {
             startScore = startScore - 100;
             let counter = score;
             counter.innerHTML = `Score : ${startScore}`
+            pressButton.addEventListener('click', function(e){
+                picture.src="https://i.ppy.sh/dc06ba4cbf03c40106ba162481f85de1b4dc4c86/68747470733a2f2f692e696d6775722e636f6d2f354d546e4a424b2e706e67"
+                multiplyScore()
+                if(startScore >= 500){
+                    picture.src="https://pbs.twimg.com/profile_images/1467840316073865218/f4tX3DQI_400x400.jpg"
+                }
+            });
             doubleScore.remove()
         }
     }
